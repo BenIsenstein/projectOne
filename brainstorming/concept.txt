@@ -1,0 +1,16 @@
+---------
+|CONCEPT|
+---------
+
+
+Three consecutive riddle rooms
+
+Each room has a different theme/makeup
+- hidden easter eggs
+- environment (make use of descriptive narration)
+- interactive elements 
+
+Once you complete a room and move on, you'll be unable to go back.
+
+You'll be unable to complete a room and move on without obtaining everything you'll need
+to beat the game.

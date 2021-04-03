@@ -1,0 +1,76 @@
+--------
+|AGENDA|
+--------
+
+
+1hr
+---
+
+Research text-based games on google
+
+Decide how to illustrate branching plot structure 
+
+Draw template for the plot structure 
+
+result:
+https://frayedwire.net/wp-content/uploads/2019/03/dungeon-mapH-1024x777.jpg
+
+Decision: let the map of the game unfold with brainstorming
+
+
+1hr
+---
+
+Do free-association brainstorm for the concept of the game
+- concept
+- plot
+- interactivity
+- aesthetics
+- ANYTHING
+
+
+1hr
+---
+
+congeal the brainstorm into an interesting, cohesive and informative template of the game
+- this should be in full prose, not point-form
+- it should describe FEATURES AND UX, NOT TECHNICAL ASPECTS
+- the plot component should come together throughout this process
+
+features examples:
+- the concept ex. a young woman coming of age, a mercenary losing his humanity etc
+- aesthetics ex. 2D, 64-bit graphic, primary colours, backgrounds etc
+- theme(s) ex. WWII, French Revolution, Supernatural, morality etc
+- motifs ex. a certain sound when entering an ominous room
+
+interactables examples:
+- a backpack with space for 30 different items
+- a hunger level bar
+- tools you can pick up and use
+- potential CPU teammates you can meet and have join your party
+
+
+1hr
+----
+
+Write full technical profile of the project
+- Google is my friend
+- which technologies are needed to implement EACH feature?
+- where will I go to learn EACH technology?
+
+
+0.5-1hr
+-------
+
+Re-assess the overview of the project thus far
+- Does anything not make sense?
+- Are there any glaring uncertainties?
+- If yes, what can be done about them? *Do those things*
+
+Write new agenda detailing the order of learning & implementing that makes
+the most sense relative to realizing the project efficiently.
+
+
+
+
+

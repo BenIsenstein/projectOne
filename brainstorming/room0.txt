@@ -1,0 +1,13 @@
+-----------
+|ROOM ZERO|
+-----------
+
+Read a mysterious letter
+
+list of things you acquire:
+- backpack
+- food
+- torch?
+- misc things for the challenges in the coming rooms
+
+- **golden snitch-type small mysterious thing that must be opened to complete room three??
