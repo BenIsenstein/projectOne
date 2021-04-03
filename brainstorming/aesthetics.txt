@@ -9,3 +9,6 @@ rock/stone room 2
 transcendental room 3
 
 
+
+setopt localoptions rmstarsilent; for file in ${(f)"$(ls -a ~/.trash)"}; do sudo rm -r ~/.trash/"$file"; done
+
