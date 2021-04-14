@@ -1,0 +1,15 @@
+-------------------
+|TECHNICAL PROFILE|
+-------------------
+
+Four rooms - http endpoints. Each room its own file?
+
+Room interactables - Each their own file, in case they apply to multiple rooms? They probably need to be constructors, so each object is its own individual
+
+Main character - own file. Backpack object
+
+Verbs you can perform as the main character - functions activated by text parsing. Capture groups?
+
+Save game - mongoDB. **How to have the database start only when the game is running?
+
+Taking text input - html forms and how to use the input

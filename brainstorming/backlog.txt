@@ -1,0 +1,35 @@
+----------------------------
+|NOUNS & ATTRIBUTES & VERBS|
+----------------------------
+
+As a player I can:
+start the game from scratch as a guest, and lose all progress when I leave.
+
+As a player I can:
+Make a new account with username and password
+
+As a player I can:
+Save my game.
+
+As a player I can:
+Come back to my game and continue where I left off
+
+As a player I can:
+Check my inventory
+
+As a player I can:
+Go/walk in a direction
+- given information about what is in either direction, head there
+
+As a player I can:
+Interact with the object immediately in front of me, and items I possess
+- take
+- talk
+- use
+- read
+
+As a player I can:
+Give text input to create actions
+- html form
+
+

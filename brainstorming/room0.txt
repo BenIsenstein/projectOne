@@ -2,12 +2,21 @@
 |ROOM ZERO|
 -----------
 
+Plain white room, no windows. Door at the opposite end of the room is locked.
+
+Open chest
+ 
 Read a mysterious letter
 
 list of things you acquire:
 - backpack
+- jacket
 - food
 - torch?
-- misc things for the challenges in the coming rooms
+
 
 - **golden snitch-type small mysterious thing that must be opened to complete room three??
+
+After reading letter, depressible panel reveals itself in the wall to the right.
+
+Press the panel, the door swings open

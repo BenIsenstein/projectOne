@@ -1,0 +1,27 @@
+-----------------------
+|IMPLEMENTATION AGENDA|
+-----------------------
+
+Build account creation & login process
+--------------------------------------
+
+Research how to properly serve an html page.
+
+Research how to handle html form data.
+
+Research how to check if someone is already logged in??
+
+Write a home.html file that displays options
+- Description
+- Login
+- Sign up
+- Play as guest
+
+Write description.html
+
+Write login.html
+
+Write signup.html
+
+write guest.html
+
