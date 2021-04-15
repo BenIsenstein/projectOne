@@ -10,4 +10,6 @@ router.get('/:roomId', (req, res) => {
     router.use(`/${roomId}`, room)
 })
 
-module.exports = router
+module.exports = {
+    router
+}

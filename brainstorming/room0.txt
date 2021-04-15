@@ -11,9 +11,6 @@ Read a mysterious letter
 list of things you acquire:
 - backpack
 - jacket
-- food
-- torch?
-
 
 - **golden snitch-type small mysterious thing that must be opened to complete room three??
 

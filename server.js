@@ -2,14 +2,14 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
 
-const roomRoutes = require('./routes/room')
 const homepageRoutes = require('./routes/homepageOperations')
+const roomRoutes = require('./routes/room')
 
-app.use('/room', roomRoutes)
+
 app.use('/', homepageRoutes)
+app.use('/room', roomRoutes)
 
 
 
-app.listen(port, () => {
-    console.log(`Game server listening at http://localhost:${port}`)
-  })
+
+app.listen(port, () => console.log(`Game server listening at http://localhost:${port}`))

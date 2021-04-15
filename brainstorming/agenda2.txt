@@ -5,23 +5,52 @@
 Build account creation & login process
 --------------------------------------
 
-Research how to properly serve an html page.
+Research how to properly serve an html page. √
 
 Research how to handle html form data.
 
 Research how to check if someone is already logged in??
 
-Write a home.html file that displays options
+Write a home.html file that displays options √
 - Description
 - Login
 - Sign up
 - Play as guest
 
-Write description.html
+Write description.html √
 
-Write login.html
+Write login.html √
 
-Write signup.html
+Write signup.html √
 
-write guest.html
+write guest.html √
+
+
+Build the core game model
+-------------------------
+
+
+write constructor for player √
+
+write constructor for chest √
+
+write constructor for cpu
+
+write constructor for tool/object 
+
+settle on a first-iteration for mapping the layout of a room, and build it.√
+
+*Write the constructor algorithm for room vectors.
+
+
+
+
+
+
+
+figure out how verbs are going to operate. 
+-**NOTE** Use backlog.txt, and make sure to write code that plays out the stories that need to take place.
+- Re-visit html form output. 
+- Build a first-iteration text parser for verbs.
+- Settle on a first iteration for the routing of verbs.
 
