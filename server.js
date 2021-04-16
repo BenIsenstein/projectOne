@@ -3,7 +3,7 @@ const app = express()
 const port = process.env.PORT || 3000
 
 const homepageRoutes = require('./routes/homepageOperations')
-const roomRoutes = require('./routes/room')
+const {router: roomRoutes} = require('./routes/room')
 
 
 app.use('/', homepageRoutes)

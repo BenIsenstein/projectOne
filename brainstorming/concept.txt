@@ -6,7 +6,6 @@
 Three consecutive riddle rooms
 
 Each room has a different theme/makeup
-- hidden easter eggs
 - environment (make use of descriptive narration)
 - interactive elements 
 

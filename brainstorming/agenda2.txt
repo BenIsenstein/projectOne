@@ -40,10 +40,19 @@ write constructor for tool/object
 
 settle on a first-iteration for mapping the layout of a room, and build it.√
 
-*Write the constructor algorithm for room vectors.
+####
+write a quick description for every vector in every room. MAKE IT QUICK for now. **should every description be in an object to populate flexibly? What about interactables?**
+finish the code to populate every room with the interactables. 
+**Consider how routing through rooms will work. 
+- will each vector be an endpoint? or a query param?
+- if query param, how to refresh page? with a POST request?**
 
+Learn html form input
 
+Write code for 'walk' verb
+######
 
+BY END OF FRIDAY APRIL 16: be able to walk through room 0 and complete it, with text input alone. :) 
 
 
 
