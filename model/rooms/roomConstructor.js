@@ -1,8 +1,4 @@
-const {Chest} = require("./chest")
-const {Letter} = require("./letter")
-const {Component} = require("./object")
-const {Door} = require("./door")
-
+const {centralRoomsObject} = require("./centralRoomsObject")
 
 //This function will populate every vector in a room's 
 //vectors object with the spaces you can move to from that vector.
@@ -66,8 +62,8 @@ const surroundingVectors = (xRange, yRange, orderedPair) => {
     return resultingVectors
 }
 
-
-const vectorSpawner = (xRange, yRange) => {
+//creates a data map for a room of any dimensions. can only be a square room.
+const vectorSpawner = (roomName, xRange, yRange) => {
     let vectorsObject = {}
     let xVals = []
     let yVals = []
@@ -90,11 +86,14 @@ const vectorSpawner = (xRange, yRange) => {
                 x: xVal, y: yVal
             }
 
-            vectorsObject[`x${xVal}y${yVal}`] = {
+            let vectorName = `x${xVal}y${yVal}`
+            let vector = centralRoomsObject[`${roomName}`][vectorName]
+
+            vectorsObject[vectorName] = {
                 vector: orderedPair,
                 availableToMove: surroundingVectors(xRange, yRange, orderedPair),
-                interactiveContent: null,
-                description: null
+                interactableContent: vector.interactableContent,
+                description: vector.description
             }
         }
     }
@@ -102,25 +101,10 @@ const vectorSpawner = (xRange, yRange) => {
     return vectorsObject
 }
 
-
-function Room(roomId, xRange, yRange) {
-    this.name = `Room ${roomId}`
-    this.id = roomId
-    this.description = `${this.name}. New room, new mystery...`
-    this.vectors = vectorSpawner(xRange, yRange)
-}
-
-
-let testRoom = new Room(0, 3, 3)
-
-console.log(testRoom.name + ' ' + testRoom.id + '. ' + testRoom.description) 
-console.log(testRoom.vectors)
-
-for (let name in testRoom.vectors) {
-    console.log(`${name}  availableToMove:\n`)
-    for (let vector in testRoom.vectors[`${name}`].availableToMove) {
-        console.log(testRoom.vectors[`${name}`].availableToMove[`${vector}`])
-    }
+function Room(roomName, xRange, yRange) {
+    this.name = roomName
+    this.description = `${roomName}. New room, new mystery...`
+    this.vectors = vectorSpawner(roomName, xRange, yRange)
 }
 
 module.exports = {

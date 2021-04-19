@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Form</title>
+</head>
+<body>
+
+    <p> 
+        paragraph text
+    </p>
+
+    <form action="" method="post" id="inputForm">
+        <input type="text" name="input" id="input" required autofocus>
+    </form>
+</body>
+
+
+<script src='/spawnInputForm.js'></script>
+
+<script> 
+    
+    const {hostUrl} = require("../server")
+
+    let inputForm = document.getElementById("inputForm")
+    window.onload = () => inputForm.setAttribute("action", hostUrl)
+
+    // Submit the form when the user releases enter key on the keyboard
+    inputForm.addEventListener("keyup", function(event) {
+        if (event.which === 13) {
+            // Cancel the default submit as there is no submit button. Would likely throw an error
+            event.preventDefault()
+            inputForm.submit()
+        }
+    })
+</script>
+
+</html>
