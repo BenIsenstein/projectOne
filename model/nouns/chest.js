@@ -1,9 +1,18 @@
 //Chest object constructor
-function Chest(contents) {
+
+function Chest(contentsObject) {
     this.name = "chest"
-    this.contents = contents
-    this.displayContents = () => {console.log("Chest contents:\n"); console.log(this.contents)}
-}
+    this.contents = contentsObject
+    this.displayContents = () => {
+        let contents = this.contents
+        let contentsMessage = 'Chest contents:<br><br>'
+        for (let key in contents) {
+            contentsMessage += key + ': '
+            contentsMessage += contents[key].description + '<br><br>'
+        }
+        return contentsMessage
+    }
+}   
 
 module.exports = {
     Chest

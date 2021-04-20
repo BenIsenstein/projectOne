@@ -7,8 +7,9 @@
 //jacket
 //backpack(inventory)
 
-function Component(componentId, description) {
+function Component(componentId, componentName, description) {
     this.id = componentId,
+    this.name = componentName
     this.description = description
 }
 

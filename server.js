@@ -9,11 +9,9 @@ app.get('/', (req, res) => res.redirect('/homepage/home'))
 
 const {router: homepageRouter} = require('./routes/homepageOperations')
 const {router: gameplayRouter} = require('./routes/gameplay')
-const {router: inputForm} = require('./routes/inputForm')
 
 app.use('/homepage', homepageRouter)
 app.use('/play', gameplayRouter)
-app.use('/testform', inputForm)
 
-app.use(express.static('public'))
-app.listen(port, () => console.log(`Game server listening at ${hostUrl}`))
+//app.use(express.static('public'))
+app.listen(port, () => console.log(`RIDDLE ADVENTURE listening at ${hostUrl}`))

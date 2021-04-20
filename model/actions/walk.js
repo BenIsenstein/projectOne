@@ -1,4 +1,6 @@
 const walk = (currentVector, direction) => {
+    //make sure a direction was given
+    if (direction === '') {return null}
     //assess availableToMove. Define object and array versions.
     let surroundingVectorsObject = currentVector.availableToMove
     let surroundingVectorsArray = Object.keys(surroundingVectorsObject)

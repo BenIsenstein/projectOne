@@ -19,7 +19,6 @@ const surroundingVectors = (xRange, yRange, orderedPair) => {
             direction: "West"
         }
     } 
-
     //check if there is room to move one square to the right, ie "East".
     if (orderedPair.x < xRange) {
         let xOneMore = orderedPair.x + 1
@@ -32,7 +31,6 @@ const surroundingVectors = (xRange, yRange, orderedPair) => {
             direction: "East"
         }
     } 
-
     //check if there is room to move one square down, ie "South".
     if (orderedPair.y > 1) {
         let xTheSame = orderedPair.x 
@@ -45,7 +43,6 @@ const surroundingVectors = (xRange, yRange, orderedPair) => {
             direction: "South"
         }
     } 
-
     //check if there is room to move one square above, ie "North".
     if (orderedPair.y < yRange) {
         let xTheSame = orderedPair.x 
@@ -58,7 +55,6 @@ const surroundingVectors = (xRange, yRange, orderedPair) => {
             direction: "North"
         }
     } 
-
     return resultingVectors
 }
 
@@ -87,17 +83,16 @@ const vectorSpawner = (roomName, xRange, yRange) => {
             }
 
             let vectorName = `x${xVal}y${yVal}`
-            let vector = centralRoomsObject[`${roomName}`][vectorName]
+            let vectorContent = centralRoomsObject[`${roomName}`][vectorName]
 
             vectorsObject[vectorName] = {
                 vector: orderedPair,
                 availableToMove: surroundingVectors(xRange, yRange, orderedPair),
-                interactableContent: vector.interactableContent,
-                description: vector.description
+                interactableContent: vectorContent.interactableContent,
+                description: vectorContent.description
             }
         }
     }
-
     return vectorsObject
 }
 
