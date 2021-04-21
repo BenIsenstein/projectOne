@@ -1,7 +1,4 @@
-const {Chest} = require("../nouns/chest")
-const {Letter} = require("../nouns/letter")
-const {Component} = require("../nouns/object")
-const {Door} = require("../nouns/door")
+const {Door, Chest, Letter, Component, YesOrNoObject} = require("./objectsModule")
 
 let centralRoomsObject = {}
 
@@ -64,7 +61,7 @@ centralRoomsObject['room0'].x2y2.interactableContent = {
             name: "jacket",
             description: "Stay cozy out there!"
         },
-        brokenGears: new Component(5, "brokenGears", "A rusted and shoddy-looking jumble of old gears. Probably useless.")
+        'broken gears': new Component(5, "broken gears", "A rusted and shoddy-looking jumble of old gears. Probably useless.")
     })
 }
 

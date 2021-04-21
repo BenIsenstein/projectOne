@@ -16,7 +16,7 @@ const surroundingVectors = (xRange, yRange, orderedPair) => {
                 x: `${xOneLess}`,
                 y: `${yTheSame}`
             },
-            direction: "West"
+            direction: "west"
         }
     } 
     //check if there is room to move one square to the right, ie "East".
@@ -28,7 +28,7 @@ const surroundingVectors = (xRange, yRange, orderedPair) => {
                 x: `${xOneMore}`,
                 y: `${yTheSame}`
             },
-            direction: "East"
+            direction: "east"
         }
     } 
     //check if there is room to move one square down, ie "South".
@@ -40,7 +40,7 @@ const surroundingVectors = (xRange, yRange, orderedPair) => {
                 x: `${xTheSame}`,
                 y: `${yOneLess}`
             },
-            direction: "South"
+            direction: "south"
         }
     } 
     //check if there is room to move one square above, ie "North".
@@ -52,7 +52,7 @@ const surroundingVectors = (xRange, yRange, orderedPair) => {
                 x: `${xTheSame}`,
                 y: `${yOneMore}`
             },
-            direction: "North"
+            direction: "north"
         }
     } 
     return resultingVectors
@@ -102,6 +102,13 @@ function Room(roomName, xRange, yRange) {
     this.vectors = vectorSpawner(roomName, xRange, yRange)
 }
 
+let allRooms = {
+    room0: new Room('room0', 3, 3),
+    room1: new Room('room1', 4, 5),
+    room2: new Room('room2', 3, 6),
+    room3: new Room('room3', 1, 2)
+}
+
 module.exports = {
-    Room
+    allRooms
 }

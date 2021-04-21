@@ -7,7 +7,7 @@ Build account creation & login process
 
 Research how to properly serve an html page. √
 
-Research how to handle html form data.
+Research how to handle html form data.√
 
 Research how to check if someone is already logged in??
 
@@ -43,19 +43,19 @@ settle on a first-iteration for mapping the layout of a room, and build it.√
 write the functionalioty to populate a room's vectors flexibly. √
 
 ####
-**Consider how routing through rooms will work. 
-- will each vector be an endpoint? or a query param? or something internal to the room's html file?
-- same question for each VERB?
-- if query param, how to refresh page? with a POST request?**
+**Consider how routing through rooms will work. √
+- will each vector be an endpoint? or a query param? or something internal to the room's html file? √
+- same question for each VERB? √
+- if query param, how to refresh page? with a POST request?** √
 
 
-figure out how verbs are going to operate. 
+figure out how verbs are going to operate.  √
 -**NOTE** Use backlog.txt, and make sure to write code that plays out the stories that need to take place.
 - Re-visit html form output. 
 - Build a first-iteration text parser for verbs.
 - Settle on a first iteration for the routing of verbs.
 
-Write code for 'walk' verb
+Write code for 'walk' verb√
 ######
 
 BY END OF FRIDAY APRIL 16: be able to walk through room 0 and complete it, with text input alone. :) 

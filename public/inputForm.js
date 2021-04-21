@@ -17,13 +17,7 @@ router.get('/', (req,res) => {
 //handle post request from the form.
 router.post('/', (req, res) => {
     let formSubmission = Object.values(req.body)[0]
-
-    console.log('successful post request')
-    console.log('Request content:', formSubmission)
-    console.log("referer: " + req.get('referer'))
-    
     res.redirect('/testform')
-    //res.send('your post request has been heard comrade')
 })
 
 module.exports = {
