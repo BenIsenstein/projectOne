@@ -111,19 +111,38 @@ centralRoomsObject['room0'].x3y3.interactableContent = {}
 centralRoomsObject['room1'] = {}
 
 centralRoomsObject['room1'].x1y1 = {}
-centralRoomsObject['room1'].x1y1.description = "test"
+centralRoomsObject['room1'].x1y1.description = `
+You're standing in the Southwest corner of the room. Just ahead of you, <br>
+to the North, is a bookshelf. To the East of that, there is a reading area <br> 
+with some chairs spread around an ornate rug. A woman is sitting in one of <br>
+the chairs, intensely focused on her book.
+`
 centralRoomsObject['room1'].x1y1.interactableContent = {}
 
 centralRoomsObject['room1'].x1y2 = {}
-centralRoomsObject['room1'].x1y2.description = "test"
+centralRoomsObject['room1'].x1y2.description = `
+You are at the South end of the room, just West of where you started. Directly<br>
+in front of you is a reading area with some chairs spread around an ornate rug. <br>
+A woman is sitting in one of the chairs, intensely focused on her book.
+`
 centralRoomsObject['room1'].x1y2.interactableContent = {}
 
 centralRoomsObject['room1'].x1y3 = {}
-centralRoomsObject['room1'].x1y3.description = "test"
+centralRoomsObject['room1'].x1y3.description = `
+You're standing at the South end of a library. Along the West wall are two bookshelves. <br>
+Parralel to the bookshelves, just out from the wall are two reading areas with ornate rugs.<br>
+In the reading area closest to you, a woman is sitting in a chair, intensely focused on her book.<br>
+Halfway along the East wall is a vintage-looking solid oak desk. No one is sitting at the desk.
+`
 centralRoomsObject['room1'].x1y3.interactableContent = {}
 
 centralRoomsObject['room1'].x1y4 = {}
-centralRoomsObject['room1'].x1y4.description = "test"
+centralRoomsObject['room1'].x1y4.description = `
+You're standing in the Southeast corner of the room. The oak desk is halfway along the East wall<br>
+ahead of you. Across from you on the West side of the room are two bookshelves against the wall,<br>
+each with its own reading area. In the Southern reading area, closest to you, a woman is sitting <br>
+in a chair, intensely focused on her book.
+`
 centralRoomsObject['room1'].x1y4.interactableContent = {}
 
 centralRoomsObject['room1'].x1y5 = {}
