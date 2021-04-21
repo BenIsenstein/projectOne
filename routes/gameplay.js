@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const {allRooms} = require("../model/roomsModule")
-const {player} = require("../model/objectsModule")
+const {allRooms} = require("../model/gameplay/roomsModule")
+const {player} = require("../model/gameplay/objectsModule")
 const {createSceneText} = require("../view/createSceneText")
 const {parseAction, walk, read, take, use, enter, inventory, open} = require("../model/gameplay/actionsModule")
 let router = express.Router()
@@ -28,8 +28,8 @@ router.get('/:room/:vector', (req, res) => {
     res.send(scene)
 })
 
-//all post requests come in from the html form that the user
-//plays the game with. The code inside this router.post() uses 'parseAction()'
+//all POST requests come in from the html form that the user
+//plays the game with. The code inside this POST handler uses 'parseAction()'
 //to parse the user's input into a function (action), and what to perform
 //the function on (noun). Every possible 'action' function can operate with
 //some combination of the inputted noun, the currentVectorObject

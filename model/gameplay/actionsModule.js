@@ -67,6 +67,7 @@ const read = (currentVector, noun, player, directory) => {
 
 const take = (currentVector, noun, player) => {
     let chestObject = currentVector.interactableContent.chest.contents
+    console.log('chest object: ',chestObject)
     let desiredItem = chestObject[noun] 
     function deleteAndDisplay (noun) {
         delete chestObject[noun]
@@ -85,11 +86,11 @@ const take = (currentVector, noun, player) => {
         return 'You have nothing to carry that in!'
     else if (desiredItem.name === 'backpack') {
         player.inventory = {}
-        deleteAndDisplay('backpack')
+        return deleteAndDisplay('backpack')
     }
     else {
         player.inventory[noun] = desiredItem
-        deleteAndDisplay(noun)
+        return deleteAndDisplay(noun)
     } 
 }
 
