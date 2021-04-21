@@ -36,9 +36,7 @@ const open = (currentVector, noun) => {
 
 const read = (currentVector, noun, player, directory) => {
     function ifElseRead(itemToRead) {
-        if (!itemToRead) 
-            return "That isn't in here."
-        else {
+        if (itemToRead) {
             return `
             <p style="color: blue;">
                 <b>${noun}:</b>
@@ -49,6 +47,8 @@ const read = (currentVector, noun, player, directory) => {
             </p>
             `
         }
+        else 
+            return "That isn't in here."
     }
 
     if (/chest/i.test(directory)) {
@@ -68,24 +68,7 @@ const read = (currentVector, noun, player, directory) => {
 const take = (currentVector, noun, player) => {
     let chestObject = currentVector.interactableContent.chest.contents
     let desiredItem = chestObject[noun] 
-
-    if (!desiredItem) 
-        return "Can't take that."
-    else if (!player.inventory && desiredItem.name !== 'backpack') 
-        return 'You have nothing to carry that in!'
-    else if (desiredItem.name === 'backpack') {
-        player.inventory = {}
-        delete chestObject['backpack']
-        return `
-        <p style="color: red;">
-            <br>
-            <br>
-            <b>Took backpack!</b>
-        </p>
-        `
-    }
-    else {
-        player.inventory[noun] = desiredItem
+    function deleteAndDisplay (noun) {
         delete chestObject[noun]
         return `
         <p style="color: red;">
@@ -94,11 +77,22 @@ const take = (currentVector, noun, player) => {
             <b>Took ${noun}!</b>
         </p>
         `
+    }
+
+    if (!desiredItem) 
+        return "Can't take that."
+    else if (!player.inventory && desiredItem.name !== 'backpack') 
+        return 'You have nothing to carry that in!'
+    else if (desiredItem.name === 'backpack') {
+        player.inventory = {}
+        deleteAndDisplay('backpack')
+    }
+    else {
+        player.inventory[noun] = desiredItem
+        deleteAndDisplay(noun)
     } 
 }
 
-//assess availableToMove.
-//test against the direction argument 
 const walk = (currentVector, direction) => {
     let availableToMove = currentVector.availableToMove
     for (let vector in availableToMove) 
