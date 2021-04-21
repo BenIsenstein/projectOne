@@ -73,7 +73,7 @@ in the middle of the room, is the chest. <br>
 <br> 
 The door beckons you to enter...
 `
-centralRoomsObject['room0'].x2y3.interactableContent = {door: new Door('http://localhost:3000/play/room1/x2y1')}
+centralRoomsObject['room0'].x2y3.interactableContent = {door: new Door('http://localhost:3000/play/room1/x3y1')}
 
 
 centralRoomsObject['room0'].x3y1 = {}
@@ -120,29 +120,15 @@ the chairs, intensely focused on her book.
 centralRoomsObject['room1'].x1y1.interactableContent = {}
 
 centralRoomsObject['room1'].x1y2 = {}
-centralRoomsObject['room1'].x1y2.description = `
-You are at the South end of the room, just West of where you started. Directly<br>
-in front of you is a reading area with some chairs spread around an ornate rug. <br>
-A woman is sitting in one of the chairs, intensely focused on her book.
-`
+centralRoomsObject['room1'].x1y2.description = ''
 centralRoomsObject['room1'].x1y2.interactableContent = {}
 
 centralRoomsObject['room1'].x1y3 = {}
-centralRoomsObject['room1'].x1y3.description = `
-You're standing at the South end of a library. Along the West wall are two bookshelves. <br>
-Parralel to the bookshelves, just out from the wall are two reading areas with ornate rugs.<br>
-In the reading area closest to you, a woman is sitting in a chair, intensely focused on her book.<br>
-Halfway along the East wall is a vintage-looking solid oak desk. No one is sitting at the desk.
-`
+centralRoomsObject['room1'].x1y3.description = ''
 centralRoomsObject['room1'].x1y3.interactableContent = {}
 
 centralRoomsObject['room1'].x1y4 = {}
-centralRoomsObject['room1'].x1y4.description = `
-You're standing in the Southeast corner of the room. The oak desk is halfway along the East wall<br>
-ahead of you. Across from you on the West side of the room are two bookshelves against the wall,<br>
-each with its own reading area. In the Southern reading area, closest to you, a woman is sitting <br>
-in a chair, intensely focused on her book.
-`
+centralRoomsObject['room1'].x1y4.description = ''
 centralRoomsObject['room1'].x1y4.interactableContent = {}
 
 centralRoomsObject['room1'].x1y5 = {}
@@ -150,7 +136,11 @@ centralRoomsObject['room1'].x1y5.description = "test"
 centralRoomsObject['room1'].x1y5.interactableContent = {}
 
 centralRoomsObject['room1'].x2y1 = {}
-centralRoomsObject['room1'].x2y1.description = "test"
+centralRoomsObject['room1'].x2y1.description = `
+You are at the South end of the room, just West of where you started. Directly<br>
+in front of you is a reading area with some chairs spread around an ornate rug. <br>
+A woman is sitting in one of the chairs, intensely focused on her book.
+`
 centralRoomsObject['room1'].x2y1.interactableContent = {}
 
 centralRoomsObject['room1'].x2y2 = {}
@@ -170,7 +160,12 @@ centralRoomsObject['room1'].x2y5.description = "test"
 centralRoomsObject['room1'].x2y5.interactableContent = {}
 
 centralRoomsObject['room1'].x3y1 = {}
-centralRoomsObject['room1'].x3y1.description = "test"
+centralRoomsObject['room1'].x3y1.description = `
+You're standing at the South end of a library. Along the West wall are two bookshelves. <br>
+Parralel to the bookshelves, just out from the wall are two reading areas with ornate rugs.<br>
+In the reading area closest to you, a woman is sitting in a chair, intensely focused on her book.<br>
+Halfway along the East wall is a vintage-looking solid oak desk. No one is sitting at the desk.
+`
 centralRoomsObject['room1'].x3y1.interactableContent = {}
 
 centralRoomsObject['room1'].x3y2 = {}
@@ -190,7 +185,12 @@ centralRoomsObject['room1'].x3y5.description = "test"
 centralRoomsObject['room1'].x3y5.interactableContent = {}
 
 centralRoomsObject['room1'].x4y1 = {}
-centralRoomsObject['room1'].x4y1.description = "test"
+centralRoomsObject['room1'].x4y1.description = `
+You're standing in the Southeast corner of the room. The oak desk is halfway along the East wall<br>
+ahead of you. Across from you on the West side of the room are two bookshelves against the wall,<br>
+each with its own reading area. In the Southern reading area, closest to you, a woman is sitting <br>
+in a chair, intensely focused on her book.
+`
 centralRoomsObject['room1'].x4y1.interactableContent = {}
 
 centralRoomsObject['room1'].x4y2 = {}

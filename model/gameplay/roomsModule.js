@@ -11,49 +11,25 @@ const surroundingVectors = (xRange, yRange, orderedPair) => {
     if (orderedPair.x > 1) {
         let xOneLess = orderedPair.x - 1
         let yTheSame = orderedPair.y
-        resultingVectors[`x${xOneLess}y${yTheSame}`] = {
-            vector: {
-                x: `${xOneLess}`,
-                y: `${yTheSame}`
-            },
-            direction: "west"
-        }
+        resultingVectors.west = `x${xOneLess}y${yTheSame}`
     } 
     //check if there is room to move one square to the right, ie "East".
     if (orderedPair.x < xRange) {
         let xOneMore = orderedPair.x + 1
         let yTheSame = orderedPair.y
-        resultingVectors[`x${xOneMore}y${yTheSame}`] = {
-            vector: {
-                x: `${xOneMore}`,
-                y: `${yTheSame}`
-            },
-            direction: "east"
-        }
+        resultingVectors.east = `x${xOneMore}y${yTheSame}`
     } 
     //check if there is room to move one square down, ie "South".
     if (orderedPair.y > 1) {
         let xTheSame = orderedPair.x 
         let yOneLess = orderedPair.y - 1
-        resultingVectors[`x${xTheSame}y${yOneLess}`] = {
-            vector: {
-                x: `${xTheSame}`,
-                y: `${yOneLess}`
-            },
-            direction: "south"
-        }
+        resultingVectors.south = `x${xTheSame}y${yOneLess}`
     } 
     //check if there is room to move one square above, ie "North".
     if (orderedPair.y < yRange) {
         let xTheSame = orderedPair.x 
         let yOneMore = orderedPair.y + 1
-        resultingVectors[`x${xTheSame}y${yOneMore}`] = {
-            vector: {
-                x: `${xTheSame}`,
-                y: `${yOneMore}`
-            },
-            direction: "north"
-        }
+        resultingVectors.north = `x${xTheSame}y${yOneMore}`
     } 
     return resultingVectors
 }

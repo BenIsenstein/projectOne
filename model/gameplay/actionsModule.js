@@ -1,8 +1,7 @@
 //Actions Module!!
 
-const enter = (currentVector, noun=null) => {
-    let interactableContentArray= Object.values(currentVector.interactableContent)
-    let door = interactableContentArray.find(item => item.name === 'door')
+const enter = (currentVector) => {
+    let door = currentVector.interactableContent.door
     if (door) 
         return door.route
     else 
@@ -24,8 +23,7 @@ const inventory = (player) => {
 }
 
 const open = (currentVector, noun) => {
-    let interactableContentArray= Object.values(currentVector.interactableContent)
-    let chest = interactableContentArray.find(item => item.name === 'chest')
+    let chest = currentVector.interactableContent.chest
     if (noun !== 'chest' && noun !== '') 
         return "You can't open that."
     else if (chest) 
@@ -35,31 +33,24 @@ const open = (currentVector, noun) => {
 }
 
 const read = (currentVector, noun, player, directory) => {
-    function ifElseRead(itemToRead) {
-        if (itemToRead) {
-            return `
-            <p style="color: blue;">
-                <b>${noun}:</b>
-                <br>
-            </p>
-            <p>
-                ${itemToRead.text}
-            </p>
-            `
-        }
-        else 
-            return "That isn't in here."
-    }
+    const ifElseRead = itemToRead => itemToRead ?
+        `<p style="color: blue;">
+             <b>${noun}:</b>
+             <br>
+         </p>
+         <p>
+             ${itemToRead.text}
+         </p>`
+
+          : "That isn't in here."     
 
     if (/chest/i.test(directory)) {
-        let chestValuesArray = Object.values(currentVector.interactableContent.chest.contents)
-        let itemToRead = chestValuesArray.find(item => item.name === noun)
-        ifElseRead(itemToRead)
+        let itemToRead = currentVector.interactableContent.chest.contents[noun]
+        return ifElseRead(itemToRead)
     }
     else if (/inventory/i.test(directory)) {
-        let inventoryArray = Object.values(player.inventory)
-        let itemToRead = inventoryArray.find(item => item.name === noun)
-        ifElseRead(itemToRead)           
+        let itemToRead = player.inventory[noun]
+        return ifElseRead(itemToRead)           
     }
     else 
         return "You can't do that here."
@@ -67,10 +58,9 @@ const read = (currentVector, noun, player, directory) => {
 
 const take = (currentVector, noun, player) => {
     let chestObject = currentVector.interactableContent.chest.contents
-    console.log('chest object: ',chestObject)
     let desiredItem = chestObject[noun] 
     function deleteAndDisplay (noun) {
-        delete chestObject[noun]
+        delete chestObject[noun] 
         return `
         <p style="color: red;">
             <br>
@@ -95,11 +85,7 @@ const take = (currentVector, noun, player) => {
 }
 
 const walk = (currentVector, direction) => {
-    let availableToMove = currentVector.availableToMove
-    for (let vector in availableToMove) 
-        if (availableToMove[vector].direction === direction) 
-            return vector     
-    return null
+    return currentVector.availableToMove[direction]
 }
 
 const use = () => {
@@ -117,7 +103,8 @@ const allActions = [ //just for keeping track
     'y',
     'yes',
     'n',
-    'no'
+    'no',
+    'quit'
 ]
 
 //action is the first word, noun is all the rest.
@@ -126,10 +113,7 @@ function parseAction(userInput) {
     let inputWordsArray = userInput.split(' ')
     let action = inputWordsArray[0].toLowerCase()
     let noun = inputWordsArray.slice(1,).join(' ').toLowerCase()
-    return {
-        action,
-        noun
-    }
+    return {action,noun}
 }
 
 module.exports = {

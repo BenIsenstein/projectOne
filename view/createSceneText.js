@@ -1,5 +1,3 @@
-const handleMessage = (message) => message ? `${message}<br><br>` : ''
-
 const createSceneText = (description, message=null) => `
 <!DOCTYPE html>
 <html>
@@ -8,7 +6,7 @@ const createSceneText = (description, message=null) => `
 </head>
 <body>
     <p> 
-        ${handleMessage(message)}
+        ${message ? message : ''}
     </p>    
     <p> 
         ${description}
