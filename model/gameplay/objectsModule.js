@@ -19,10 +19,9 @@ function YesOrNoObject(name) {
     this.boolean = false
     this.changeBoolean = () => {
         let boolean = this.boolean
-        if (boolean)
-            boolean = false
-        else
-            boolean = true
+        
+        if (boolean) boolean = false
+        else boolean = true
     }
 }
 
@@ -32,10 +31,12 @@ function Chest(contentsObject) {
     this.displayContents = () => {
         let contents = this.contents
         let contentsMessage = 'Chest contents:<br><br>'
+        
         for (let key in contents) {
             contentsMessage += key + ': '
             contentsMessage += contents[key].description + '<br><br>'
         }
+
         return contentsMessage
     }
 }   

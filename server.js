@@ -13,5 +13,4 @@ const {router: gameplayRouter} = require('./routes/gameplay')
 app.use('/homepage', homepageRouter)
 app.use('/play', gameplayRouter)
 
-//app.use(express.static('public'))
 app.listen(port, () => console.log(`RIDDLE ADVENTURE listening at ${hostUrl}`))

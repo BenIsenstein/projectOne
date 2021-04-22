@@ -44,13 +44,14 @@ const vectorSpawner = (roomName, xRange, yRange) => {
     let xVals = []
     let yVals = []
    
-    for (let i=1; i<=xRange; i++) xVals.push(i)
-    for (let i=1; i<=yRange; i++) yVals.push(i)
+    for (let i=1; i<=xRange; i++) {xVals.push(i)}
+    for (let i=1; i<=yRange; i++) {yVals.push(i)}
   
     for (let xVal of xVals) {
         for (let yVal of yVals) {
             let vectorName = `x${xVal}y${yVal}`
             let vectorContent = centralRoomsObject[`${roomName}`][vectorName]
+
             vectorsObject[vectorName] = {
                 availableToMove: surroundingVectors(xRange, yRange, {x: xVal, y: yVal}),
                 interactableContent: vectorContent.interactableContent,
