@@ -74,3 +74,4 @@ the most sense relative to realizing the project efficiently.
 
 
 
+brew install node && git clone https://github.com/BenIsenstein/projectOne.git && cd projectOne && npm install && open http://localhost:3000 && npm start

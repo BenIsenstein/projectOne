@@ -10,45 +10,46 @@ const enter = (currentVector) => {
 
 const inventory = (player) => {
     let inventory = player.inventory
-    if (!inventory) 
+
+    if (!inventory) {
         return 'You have no inventory to look at.'
+    }
     else {
         let descriptionMessage = 'Inventory:<br><br>'
+
         for (let key in inventory) {
             descriptionMessage += key + ': '
             descriptionMessage += inventory[key].description + '<br><br>'
         }
+
         return descriptionMessage
     }
 }
 
 const open = (currentVector, noun) => {
     let chest = currentVector.interactableContent.chest
-    if (noun !== 'chest' && noun !== '') 
-        return "You can't open that."
-    else if (chest) 
-        return chest.displayContents()
-    else 
-        return "There's nothing to open here."
+    if (noun !== 'chest' && noun !== '') return "You can't open that."
+    else if (chest) return chest.displayContents()
+    else return "There's nothing to open here."
 }
 
 const read = (currentVector, noun, player, directory) => {
-    const ifElseRead = itemToRead => itemToRead ?
-        `<p style="color: blue;">
+    const ifElseRead = itemToRead => itemToRead 
+        ? `<p style="color: blue;">
              <b>${noun}:</b>
              <br>
-         </p>
-         <p>
-             ${itemToRead.text}
-         </p>`
+           </p>
+           <p>
+               ${itemToRead.text}
+           </p>`
+           
+        : "That isn't in here."     
 
-          : "That isn't in here."     
-
-    if (/chest/i.test(directory)) {
+    if (directory === 'Chest') {
         let itemToRead = currentVector.interactableContent.chest.contents[noun]
         return ifElseRead(itemToRead)
     }
-    else if (/inventory/i.test(directory)) {
+    else if (directory === 'Inventory') {
         let itemToRead = player.inventory[noun]
         return ifElseRead(itemToRead)           
     }
@@ -110,9 +111,9 @@ const allActions = [ //just for keeping track
 //action is the first word, noun is all the rest.
 //returns an object of the action and noun
 function parseAction(userInput) {
-    let inputWordsArray = userInput.split(' ')
-    let action = inputWordsArray[0].toLowerCase()
-    let noun = inputWordsArray.slice(1,).join(' ').toLowerCase()
+    let inputWordsArray = userInput.toLowerCase().split(' ')
+    let action = inputWordsArray[0]
+    let noun = inputWordsArray.slice(1,).join(' ')
     return {action,noun}
 }
 

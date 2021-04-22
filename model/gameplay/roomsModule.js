@@ -7,30 +7,34 @@ const {centralRoomsObject} = require("./centralRoomsObject")
 const surroundingVectors = (xRange, yRange, orderedPair) => {
     let resultingVectors = {}
 
-    //check if there is room to move one square to the left, ie "West". 
     if (orderedPair.x > 1) {
         let xOneLess = orderedPair.x - 1
         let yTheSame = orderedPair.y
+
         resultingVectors.west = `x${xOneLess}y${yTheSame}`
     } 
-    //check if there is room to move one square to the right, ie "East".
+    
     if (orderedPair.x < xRange) {
         let xOneMore = orderedPair.x + 1
         let yTheSame = orderedPair.y
+
         resultingVectors.east = `x${xOneMore}y${yTheSame}`
     } 
-    //check if there is room to move one square down, ie "South".
+
     if (orderedPair.y > 1) {
         let xTheSame = orderedPair.x 
         let yOneLess = orderedPair.y - 1
+
         resultingVectors.south = `x${xTheSame}y${yOneLess}`
     } 
-    //check if there is room to move one square above, ie "North".
+
     if (orderedPair.y < yRange) {
         let xTheSame = orderedPair.x 
         let yOneMore = orderedPair.y + 1
+
         resultingVectors.north = `x${xTheSame}y${yOneMore}`
     } 
+
     return resultingVectors
 }
 
@@ -39,36 +43,22 @@ const vectorSpawner = (roomName, xRange, yRange) => {
     let vectorsObject = {}
     let xVals = []
     let yVals = []
-
-    //use the xRange and yRange params to populate arrays, 
-    //so that those values may be iterated over.
-    for (let i=1; i<=xRange; i++) {
-        xVals.push(i)
-    }
-
-    for (let i=1; i<=yRange; i++) {
-        yVals.push(i)
-    }
-    
-    //populate vectorsObject with every coordinate in the field.
+   
+    for (let i=1; i<=xRange; i++) xVals.push(i)
+    for (let i=1; i<=yRange; i++) yVals.push(i)
+  
     for (let xVal of xVals) {
         for (let yVal of yVals) {
-
-            let orderedPair = {
-                x: xVal, y: yVal
-            }
-
             let vectorName = `x${xVal}y${yVal}`
             let vectorContent = centralRoomsObject[`${roomName}`][vectorName]
-
             vectorsObject[vectorName] = {
-                vector: orderedPair,
-                availableToMove: surroundingVectors(xRange, yRange, orderedPair),
+                availableToMove: surroundingVectors(xRange, yRange, {x: xVal, y: yVal}),
                 interactableContent: vectorContent.interactableContent,
                 description: vectorContent.description
             }
         }
     }
+
     return vectorsObject
 }
 
