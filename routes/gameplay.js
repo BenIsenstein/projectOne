@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const {allRooms} = require("../model/gameplay/roomsModule")
 const {player} = require("../model/gameplay/objectsModule")
 const {createSceneText} = require("../view/createSceneText")
-const {parseAction, walk, read, take, use, enter, inventory, open} = require("../model/gameplay/actionsModule")
+const {parseAction, walk, read, take, use, enter, displayInventory, open} = require("../model/gameplay/actionsModule")
 let router = express.Router()
 
 router.use(bodyParser.urlencoded({extended: true}))
@@ -21,9 +21,14 @@ router.get('/:room/:vector', (req, res) => {
     let room = req.params.room
     let vector = req.params.vector
     let message = req.query.message
-    let currentRoom = allRooms[room]
-    let description = currentRoom.vectors[vector].description
+    let description = allRooms[room].vectors[vector].description
     let scene = createSceneText(description, message)
+
+    //conditional for final scene
+    if ('cinnabun' in player.inventory) {
+        let finalVector = allRooms.room1.vectors.x3y5
+        finalVector.description = finalVector.specialDescription
+    }
 
     player.currentRoom = room
     player.currentVector = vector
@@ -35,22 +40,32 @@ router.get('/:room/:vector', (req, res) => {
 //to parse the user's input into a function (action), and what to perform
 //the function on (noun). Every possible 'action' function can operate with
 //some combination of the inputted noun, the currentVectorObject
-//and the player.currentRoom. The exception of 'inventory()' just uses the player object.
+//and the player.currentRoom. The exception of 'displayInventory()' just uses the player object.
 router.post('/', (req, res) => {
     let {action, noun} = parseAction(req.body.input)
     let currentVectorObject = allRooms[player.currentRoom].vectors[player.currentVector]
+    let interactableContent = currentVectorObject.interactableContent
+    let inventory = player.inventory
+    let inGameDirectory = req.get('referer').replace(/(.*)=(\w+)\W.*/i, '\$2')
+
+    //run conditional checks to change the status of features in the room.
+    //if statement about whether the 'X' variable feature is true/false
+    //responding code to change the 'Y' variable feature.
+    //if ('interactKey' in interactableContent)
+
+
 
     //addMessage function is very critical to the logic of the game.
     //grab the referer and remove old message query param, 
     //then direct back to the same scene with new message.
     const addMessage = (message) => {
-        let referer = req.get('referer').replace(/(.+)\?(.+)/, "\$1")
+        let referer = req.get('referer').replace(/(.+)\?(.+)/, '\$1')
 
         res.redirect(`${referer}?message=${message}`)
     }
 
     //walk function generates the vector that player is about to walk to.
-    if (action === 'walk') { 
+    if (['walk', 'go', 'head', 'run'].includes(action)) {
         let nextVector = walk(currentVectorObject, noun)
 
         if (nextVector) 
@@ -62,33 +77,33 @@ router.post('/', (req, res) => {
     //enter function generates the route to the next room. 
     //It is the 'route' attribute of the door nested in that vector object.
     else if (action === 'enter') {
-        let nextRoute = enter(currentVectorObject)
+        let nextRoute = enter(interactableContent.door)
 
         if (nextRoute) 
             res.redirect(nextRoute)
 
         else 
-            addMessage("You can't do that here.")
+            addMessage("You can't do that.")
     }
     //open function returns text to be displayed above the scene description.
     //This is convenient to use addMessage() 
     else if (action === 'open') {
-        let openMessage = open(currentVectorObject, noun)
+        let openMessage = open(interactableContent, noun) || "There's nothing to open here."
 
         addMessage(openMessage)
     }
     //the inventory function returns text representing contents of
     //player's inventory attribute. using addMessage()
     else if (action === 'inventory') {
-        let inventoryMessage = inventory(player.inventory)
+        let inventoryMessage = displayInventory(inventory)
 
         addMessage(inventoryMessage)
     }
     //the take function will add the object to player's inventory, and return a little message.
-    //the open function will display the chest again, for continuity.
-    else if (action === 'take') {
-        let takeMessage = take(currentVectorObject, noun, player)
-        let openMessage = open(currentVectorObject, 'chest') || ''
+    //the open function will display the chest again for continuity, if there is one.
+    else if (action === 'take' || action === 'grab') {
+        let takeMessage = take(interactableContent, noun, player, inGameDirectory) || "There's nothing to take here."
+        let openMessage = open(interactableContent, inGameDirectory) || ''
 
         addMessage(openMessage + '<br>' + takeMessage)
     }
@@ -96,22 +111,37 @@ router.post('/', (req, res) => {
     //check whether the player is in a chest, or their inventory.
     //add the read message. depending on which directory the player is in,
     //make sure to return to the same description that was on screen for continuity.
-    else if (action === 'read'){
-        let currentDirectory = req.get('referer').replace(/(.*)=(\w+)\W.*/i, "\$2")
-        let readMessage = read(currentVectorObject, noun, player, currentDirectory)
+    else if (action === 'read' || action === 'look' || action === 'see'){
+        let readMessage = read(currentVectorObject, noun, inventory, inGameDirectory)
 
-        if (currentDirectory === 'Chest') {
-            let openMessage = open(currentVectorObject, 'chest')
+        if (['chest', 'desk', 'lunchbox'].includes(inGameDirectory)) {
+            let openMessage = open(interactableContent, inGameDirectory)
 
             addMessage(openMessage + '<br>' + readMessage)
         }
-        else if (currentDirectory === 'Inventory') {
-            let inventoryMessage = inventory(player)
+        else if (inGameDirectory === 'Inventory') {
+            let inventoryMessage = displayInventory(inventory)
 
             addMessage(inventoryMessage + '<br>' + readMessage)
         }
-        else 
+        else {
             addMessage(readMessage) 
+        }
+    }
+    else if (['yes', 'no'].includes(action)) {
+        //panel press in room0 - makes door enterable
+        //can't pass room1 until you give cinnabun to security guard
+        if ('interactKey' in interactableContent) {
+            if (action === 'yes') {
+                interactableContent.changeInteractKey()
+                interactableContent.interactFunction()
+                addMessage(interactableContent.interactMessage)
+            }
+            else 
+                addMessage('Chose not to.')
+        } 
+        else 
+            addMessage("You can't do that here.")
     }
     //'action' variable is not a function
     else {

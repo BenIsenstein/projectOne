@@ -55,7 +55,8 @@ const vectorSpawner = (roomName, xRange, yRange) => {
             vectorsObject[vectorName] = {
                 availableToMove: surroundingVectors(xRange, yRange, {x: xVal, y: yVal}),
                 interactableContent: vectorContent.interactableContent,
-                description: vectorContent.description
+                description: vectorContent.description,
+                specialDescription: vectorContent.specialDescription
             }
         }
     }

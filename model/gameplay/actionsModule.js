@@ -2,74 +2,103 @@
 
 const walk = (currentVector, direction) => currentVector.availableToMove[direction]
 
-const enter = (currentVector) => {
-    let door = currentVector.interactableContent.door
+const enter = (door) => {
+    if (!door) 
+        return null
 
-    return door.route || door
+    else if (!door.isUnlocked)
+        return null
+
+    else
+        return door.route
 }
 
-const inventory = (inventory) => {
-    if (!inventory) {
-        return 'You have no inventory to look at.'
-    }
-    else {
-        let descriptionMessage = 'Inventory:<br><br>'
+const displayInventory = (inventory) => {
+    let descriptionMessage = 'Inventory:<br><br>'
+    
+    if (!inventory) return 'You have no inventory to look at.'
+    
+    for (let key in inventory) {
+        let item = inventory[key]
 
-        for (let key in inventory) {
-            descriptionMessage += key + ': '
-            descriptionMessage += inventory[key].description + '<br><br>'
-        }
-
-        return descriptionMessage
+        descriptionMessage += `${item.name || key}: `
+        descriptionMessage += `${item.description || `It's a ${key}.`}<br><br>`
     }
+
+    return descriptionMessage
 }
 
-const open = (currentVector, noun) => {
-    let chest = currentVector.interactableContent.chest
+const open = (interactableContent, noun) => {
+    let container = interactableContent.chest || interactableContent.desk || interactableContent.lunchbox
+    
+    if (!container)
+        return null
 
-    if (noun !== 'chest' && noun !== '') 
+    else if (![container.name, 'it', ''].includes(noun)) 
         return "You can't open that."
         
-    else if (chest) 
-        return chest.displayContents()
-
     else 
-        return "There's nothing to open here."
+        return container.displayContents()
 }
 
-const read = (currentVector, noun, player, directory) => {
-    const ifElseRead = itemToRead => itemToRead 
-        ? `<p style="color: blue;">
-             <b>${noun}:</b>
+
+const read = (currentVector, noun, inventory, directory) => {
+    if (noun === 'inventory')   
+        return displayInventory(inventory) 
+
+    else if (['chest', 'desk', 'lunchbox'].includes(directory)) 
+        return ifElseRead(currentVector.interactableContent[directory].contents[noun])
+     
+    else if (directory === 'Inventory') 
+        return ifElseRead(inventory[noun])           
+    
+    else 
+        return ifElseRead(currentVector.interactableContent[noun])    
+
+    function ifElseRead(itemToRead) {
+        return itemToRead 
+        ? `<p style="font-weight: 700; color: blue;">
+             ${noun}:
              <br>
            </p>
            <p>
-               ${itemToRead.text}
+               ${itemToRead.text || itemToRead.description || `It's a ${noun}.`} 
            </p>`
            
-        : "That isn't in here."     
-
-    if (directory === 'Chest') {
-        let itemToRead = currentVector.interactableContent.chest.contents[noun]
-
-        return ifElseRead(itemToRead)
+        : "That isn't readable, not worth looking at, or it isn't here."    
     } 
-    else if (directory === 'Inventory') {
-        let itemToRead = player.inventory[noun]
-
-        return ifElseRead(itemToRead)           
-    }
-    else {
-        return "You can't do that here."
-    }
 }
 
-const take = (currentVector, noun, player) => {
-    let chestObject = currentVector.interactableContent.chest.contents
-    let desiredItem = chestObject[noun] 
+const take = (interactableContent, noun, player, directory) => {
+    if (interactableContent[noun] && !['chest', 'desk', 'panel', 'door'].includes(noun)){
+        player.inventory[noun] = interactableContent[noun]
+        return deleteAndDisplay(interactableContent, noun)
+    }
 
-    function deleteAndDisplay (noun) {
-        delete chestObject[noun] 
+    if (!interactableContent[directory]) return null
+
+    let chestContents = interactableContent[directory].contents
+    let desiredItem = chestContents[noun] 
+
+    if (!desiredItem) {
+        return "Can't take that."
+    } 
+    else if (!player.hasBackpack && desiredItem.name !== 'backpack') {
+        return 'You have nothing to carry that in!'
+    } 
+    else if (desiredItem.name === 'backpack') {
+        player.hasBackpack = true
+
+        return deleteAndDisplay(chestContents, 'backpack')
+    } 
+    else {
+        player.inventory[noun] = desiredItem
+
+        return deleteAndDisplay(chestContents, noun)
+    } 
+
+    function deleteAndDisplay (directory, noun) {
+        delete directory[noun] 
 
         return `
         <p style="color: red;">
@@ -78,23 +107,6 @@ const take = (currentVector, noun, player) => {
         </p>
         `
     }
-
-    if (!desiredItem) {
-        return "Can't take that."
-    } 
-    else if (!player.inventory && desiredItem.name !== 'backpack') {
-        return 'You have nothing to carry that in!'
-    } 
-    else if (desiredItem.name === 'backpack') {
-        player.inventory = {}
-
-        return deleteAndDisplay('backpack')
-    } 
-    else {
-        player.inventory[noun] = desiredItem
-
-        return deleteAndDisplay(noun)
-    } 
 }
 
 const use = () => {
@@ -126,6 +138,12 @@ function parseAction(userInput) {
     return {action,noun}
 }
 
+// const allActions = [
+//     {shouldRun: function(verb) {return verb === "walk"}, run: function(direction) {}}
+
+// ]
+
+// allActions.find(action => action.shouldRun(verb))
 module.exports = {
     parseAction,
     walk,
@@ -134,5 +152,5 @@ module.exports = {
     take,
     use,
     enter,
-    inventory
+    displayInventory
 }

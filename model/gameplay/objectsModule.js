@@ -13,28 +13,51 @@
 //backpack(inventory)
 
 //**yes-or-no-responsive object?? */
+// function Door(route, text="It's a door.") {
+//     this.name = "door",
+//     this.text = text
+//     this.route = route
+// }
 
-function YesOrNoObject(name) {
-    this.name = name
-    this.boolean = false
-    this.changeBoolean = () => {
-        let boolean = this.boolean
-        
-        if (boolean) boolean = false
-        else boolean = true
+// function YesOrNoDoor(name) {
+//     this.name = name
+//     this.isUnlocked = false
+//     this.changeUnlocked = () => this.isUnlocked = !this.isUnlocked
+//     this.partnerVector = null
+// }
+// YesOrNoDoor.prototype = Object.create(Door.prototype)
+
+class Door {
+    constructor(route, text="It's a door.") {
+        this.name = "door",
+        this.text = text
+        this.route = route
+    }   
+}
+  
+class YesOrNoDoor extends Door {
+    constructor(route, text, conditionToEnter = () => null, partnerVector=null) {
+        super(route, text)
+        this.isUnlocked = false
+        this.conditionToEnter = () => conditionToEnter()
+        this.changeUnlocked = () => this.isUnlocked = !this.isUnlocked
+        this.partnerVector = partnerVector
     }
 }
+  
 
-function Chest(contentsObject) {
-    this.name = "chest"
+function Chest(name, contentsObject) {
+    this.name = name
     this.contents = contentsObject
     this.displayContents = () => {
         let contents = this.contents
-        let contentsMessage = 'Chest contents:<br><br>'
+        let contentsMessage = `${name} contents:<br><br>`
         
         for (let key in contents) {
-            contentsMessage += key + ': '
-            contentsMessage += contents[key].description + '<br><br>'
+            let item = contents[key]
+
+            contentsMessage += `${item.name || key}: `
+            contentsMessage += `${item.description || `It's a ${key}.`}<br><br>`
         }
 
         return contentsMessage
@@ -43,18 +66,14 @@ function Chest(contentsObject) {
 
 const player = {
     name: "player",
-    inventory: null,
+    hasBackpack: false,
+    inventory: {},
     currentRoom: "room0",
     currentVector: "x2y1",
     accountInfo: null,
     saveStatus: null
 }
 
-function Door(route) {
-    this.name = "door",
-    this.description = "It's a door."
-    this.route = route
-}
 
 function Component(componentId, componentName, description) {
     this.id = componentId,
@@ -62,8 +81,8 @@ function Component(componentId, componentName, description) {
     this.description = description
 }
 
-function Letter(text) {
-    this.name = "letter"
+function Letter(text, name) {
+    this.name = name
     this.text = text
     this.description = "Read me!"
 }
@@ -74,5 +93,5 @@ module.exports = {
     player,
     Component,
     Letter,
-    YesOrNoObject
+    YesOrNoDoor
 }
