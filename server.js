@@ -2,8 +2,10 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
 
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
+
 const hostUrl = `http://localhost:${port}`
-module.exports = {hostUrl}
 
 app.get('/', (req, res) => res.redirect('/homepage/home'))
 

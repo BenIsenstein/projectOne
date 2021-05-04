@@ -9,7 +9,7 @@ let getDb = connectMongoClient.then(client => client.db(databaseName))
 
 const getCollection = name => getDb.then(db => db.collection(name))
 
-const getAccountsCollection = async () => getCollection("accounts")
+const getAccountsCollection = () => getCollection("accounts")
 
 const close = () => connectMongoClient.then(client => client.close())
 

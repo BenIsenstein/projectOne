@@ -1,12 +1,11 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const {allRooms} = require("../model/gameplay/roomsModule")
 const {player} = require("../model/gameplay/objectsModule")
 const {createSceneText} = require("../view/createSceneText")
 const {parseAction, walk, read, take, use, enter, displayInventory, open} = require("../model/gameplay/actionsModule")
 let router = express.Router()
 
-router.use(bodyParser.urlencoded({extended: true}))
+
 
 router.get('/', (req, res) => res.redirect('/play/room0/x2y1'))
 
@@ -22,17 +21,19 @@ router.get('/:room/:vector', (req, res) => {
     let vector = req.params.vector
     let message = req.query.message
     let description = allRooms[room].vectors[vector].description
-    let scene = createSceneText(description, message)
+    let finalSceneCond = (
+        room === 'room1' && 
+        vector === 'x3y5' && 
+        'cinnabun' in player.inventory
+    ) 
 
     //conditional for final scene
-    if ('cinnabun' in player.inventory) {
-        let finalVector = allRooms.room1.vectors.x3y5
-        finalVector.description = finalVector.specialDescription
-    }
-
+    if (finalSceneCond) 
+        description = allRooms[room].vectors[vector].specialDescription
+    
     player.currentRoom = room
     player.currentVector = vector
-    res.send(scene)
+    res.send(createSceneText(description, message))
 })
 
 //all POST requests come in from the html form that the user
@@ -51,7 +52,6 @@ router.post('/', (req, res) => {
     //run conditional checks to change the status of features in the room.
     //if statement about whether the 'X' variable feature is true/false
     //responding code to change the 'Y' variable feature.
-    //if ('interactKey' in interactableContent)
 
 
 
@@ -69,7 +69,7 @@ router.post('/', (req, res) => {
         let nextVector = walk(currentVectorObject, noun)
 
         if (nextVector) 
-            res.redirect(`http://localhost:3000/play/${player.currentRoom}/${nextVector}`) 
+            res.redirect(`/play/${player.currentRoom}/${nextVector}`) 
         
         else 
             addMessage("You can't walk there.")
@@ -111,7 +111,7 @@ router.post('/', (req, res) => {
     //check whether the player is in a chest, or their inventory.
     //add the read message. depending on which directory the player is in,
     //make sure to return to the same description that was on screen for continuity.
-    else if (action === 'read' || action === 'look' || action === 'see'){
+    else if (['read', 'look', 'see'].includes(action)){
         let readMessage = read(currentVectorObject, noun, inventory, inGameDirectory)
 
         if (['chest', 'desk', 'lunchbox'].includes(inGameDirectory)) {
@@ -137,11 +137,13 @@ router.post('/', (req, res) => {
                 interactableContent.interactFunction()
                 addMessage(interactableContent.interactMessage)
             }
-            else 
+            else {
                 addMessage('Chose not to.')
+            }
         } 
-        else 
+        else {
             addMessage("You can't do that here.")
+        }
     }
     //'action' variable is not a function
     else {

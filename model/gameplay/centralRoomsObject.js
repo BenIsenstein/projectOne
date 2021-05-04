@@ -589,9 +589,9 @@ centralRoomsObject['room2'].x1y6.interactableContent = {}
 
 centralRoomsObject['room2'].x2y1 = {}
 centralRoomsObject['room2'].x2y1.description = `
----------------------------------<br>
-!!CONGRATULATIONS!!<br>
----------------------------------
+-----------------<br>
+!!SUCCESS!!<br>
+------------------
 `
 centralRoomsObject['room2'].x2y1.interactableContent = {}
 

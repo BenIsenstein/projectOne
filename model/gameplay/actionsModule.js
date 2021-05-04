@@ -6,7 +6,8 @@ const enter = (door) => {
     if (!door) 
         return null
 
-    else if (!door.isUnlocked)
+    console.log('isUnlocked: ', door.isUnlocked)
+    if (!door.isUnlocked)
         return null
 
     else
@@ -70,7 +71,7 @@ const read = (currentVector, noun, inventory, directory) => {
 }
 
 const take = (interactableContent, noun, player, directory) => {
-    if (interactableContent[noun] && !['chest', 'desk', 'panel', 'door'].includes(noun)){
+    if (interactableContent[noun] && !['chest', 'desk', 'panel', 'door'].includes(noun)) {
         player.inventory[noun] = interactableContent[noun]
         return deleteAndDisplay(interactableContent, noun)
     }

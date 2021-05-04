@@ -11,7 +11,7 @@ const createSceneText = (description, message=null) => `
     <p> 
         ${description}
     </p>   
-    <form action="http://localhost:3000/play" method="post">
+    <form action="/play" method="post">
         <input type="text" name="input" autofocus>
     </form>
 </body>

@@ -6,7 +6,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
 </head>
+
+<style>
+    .error {
+  color: red;
+    }   
+
+    #usernameSuccess {
+        margin: 0 0 0 360px;
+    }
+
+    #password {
+        margin: 0 0 0 4px;
+    }
+</style>
+
 <body>
     <p>Signup page</p>
+    <div>
+        <label for="username">Username Here</label>
+        <input type="text" id="username" name="username" autofocus/> 
+        <label id='usernameError' class='error'></label>
+        <label id='usernameSuccess'></label>
+    </div>
+    
+    <div>
+        <label for="password">Password Here</label>
+        <input type="password" id="password" name="password"/> 
+        <label id='passwordError' class='error'></label>
+    </div>
+    
+
+    <button onclick = submit()>SUBMIT</button>
 </body>
+
+<script>
+    async function submit() {
+        let reqName = document.getElementById('username').value
+        let reqPass = document.getElementById('password').value
+
+        let submissionData = {username: reqName, password: reqPass}
+        
+        let fetchUrl = "/homepage/signup"
+        let fetchOptions = {
+            method: 'post',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(submissionData)
+        }
+        
+        let response = await fetch(fetchUrl, fetchOptions)
+        let resObject = await response.json()
+
+        let nameErrorField = document.getElementById('usernameError')
+        let passErrorField = document.getElementById('passwordError')
+        let nameSuccessField = document.getElementById('usernameSuccess')
+
+        for (let field of [
+        nameSuccessField, 
+        nameErrorField, 
+        passErrorField
+        ]) {
+            field.innerText = ''
+        }
+
+        if (response.status === 400) {
+            if (resObject.usernameError) 
+                nameErrorField.innerText = resObject.usernameError
+
+            if (resObject.passwordError) 
+                passErrorField.innerText = resObject.passwordError
+        } 
+        else {
+            nameSuccessField.innerText = resObject.successMessage
+        }
+    }
+</script>
 </html>

@@ -6,16 +6,22 @@ const listAccounts = async () => {
     return collection.find({}).toArray()
 }
 
+const findAccountByName = async (name) => {
+    let collection = await accounts() 
+    let result = await collection.findOne({username: name})
+    return result
+}
+
 const deleteAccount = async (accountId) => {
     let collection = await accounts()  
     return collection.deleteOne({_id: ObjectId(accountId)})
 }
 
-const createAccount = async (firstName, lastName, password) => {
+const createAccount = async (username, password, game) => {
     let accountToCreate = {
-        firstName,
-        lastName,
-        password
+        username,
+        password,
+        game
     }
     let collection = await accounts()
     let insertResult = await collection.insertOne(accountToCreate)
@@ -33,6 +39,7 @@ const searchByNameFragment = async (nameFragment) => {
     
 
 module.exports = {
+    findAccountByName,
     createAccount,
     listAccounts,
     searchByNameFragment,
